@@ -12,7 +12,10 @@ router.post("/shortener", async (req, res) => {
   const token = nanoid(6);
 
   if (!validUrl.isUri(mainUrl))
-    return res.status(401).json("Please Enter A Valid Url");
+    return res.status(401).json({
+      message: "Please Enter A Valid Url",
+      error: true,
+    });
 
   try {
     let url = await Url.findOne({ mainUrl });
@@ -32,7 +35,10 @@ router.post("/shortener", async (req, res) => {
 
     return res.json(url);
   } catch (err) {
-    return res.status(500).json("Internal Server error");
+    return res.status(500).json({
+      message: "Internal Server error",
+      error: true,
+    });
   }
 });
 

@@ -13,9 +13,15 @@ router.get("/:token", async (req, res) => {
 
     if (url) return res.redirect(url.mainUrl);
 
-    return res.status(404).json("Url Doesn't Exists");
+    return res.status(404).json({
+      message: "Url Doesn't Exists",
+      error: true,
+    });
   } catch (err) {
-    return res.status(500).json("Internal Server error");
+    return res.status(500).json({
+      message: "Internal Server error",
+      error: true,
+    });
   }
 });
 
